@@ -1,4 +1,3 @@
-
 local widgetInfo  = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, --This can be changed--
 	false,
 	false,
@@ -18,7 +17,7 @@ ui.Parent = widget
 ui.ViewportFrame.CurrentCamera = game.Workspace.Camera
 
 local toolbar = plugin:CreateToolbar("Edit Viewport")
-local toggle = toolbar:CreateButton("Toggle Eidtor", "Toggle the widget", "")
+local toggle = toolbar:CreateButton("Toggle Editor!", "Toggle the Viewport Editor!", "")
 
 toggle.Click:Connect(function()
 	widget.Enabled = not widget.Enabled
@@ -45,6 +44,13 @@ end)
 
 ui.insert.MouseButton1Click:Connect(function()
 	local Selection = game:GetService("Selection")
+	local newcamera = game.Workspace.Camera:Clone()
 	local new = ui.ViewportFrame:Clone()
-	new.Parent = workspace
+	new.Parent = game.StarterGui
+	newcamera.Parent = new
+	new.CurrentCamera = newcamera
+	
+	ui.insert.Text = "Inserted in StarterGui!"
+	wait(1)
+	ui.insert.Text = "Insert Viewport"
 end)
